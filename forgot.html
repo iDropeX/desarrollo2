@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recuperar contraseña — Aircry JDM</title>
+  <link rel="stylesheet" href="styles.css?v=20251009" />
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #fff;
+      font-family: "Poppins", system-ui, sans-serif;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    main.auth {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .auth-card {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 14px;
+      padding: 40px 45px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      margin-bottom: 5px;
+    }
+
+    p.sub {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-bottom: 25px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .field label {
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .field input {
+      background: #181818;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 10px;
+      color: #fff;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    .field input:focus {
+      border-color: #ff2b2b;
+      box-shadow: 0 0 4px #ff2b2b;
+    }
+
+    .btn.primary {
+      background: #ff2b2b;
+      border: none;
+      color: #fff;
+      width: 100%;
+      padding: 10px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn.primary:hover {
+      background: #ff4545;
+    }
+
+    .auth-actions {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .auth-actions a {
+      color: #ff2b2b;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: block;
+      margin: 4px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px 0;
+      font-size: 0.85rem;
+      color: #666;
+      border-top: 1px solid #111;
+    }
+  </style>
+</head>
+<body>
+  <main class="auth">
+    <div class="auth-card">
+      <h1>Recuperar contraseña</h1>
+      <p class="sub">Ingresa tu correo electrónico para restablecer tu contraseña</p>
+
+      <form id="forgotForm">
+        <div class="field">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" placeholder="example@email.com" required />
+        </div>
+
+        <button type="submit" class="btn primary">Enviar enlace</button>
+
+        <div class="auth-actions">
+          <a href="login.html">← Volver a iniciar sesión</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>© 2025 Aircry JDM — Sushi Nikkei</footer>
+
+  <script>
+    const form = document.getElementById("forgotForm");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+
+      if (!email) {
+        alert("Por favor, ingresa tu correo.");
+        return;
+      }
+
+      alert("Se ha enviado un enlace de recuperación a tu correo ✅");
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>

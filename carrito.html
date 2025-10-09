@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carrito — Aircry JDM</title>
+  <link rel="stylesheet" href="styles.css?v=20251009" />
+</head>
+<body>
+  <header class="nav">
+    <div class="shell">
+      <div class="bar">
+        <div class="brand">
+          <div class="logo">🍱</div> JDM Aircry <strong style="color:#ff1f1f">JDM</strong>
+        </div>
+        <div class="actions">
+          <a class="btn ghost" href="menu.html">📜 Carta</a>
+          <a class="btn cart">🛒<span class="cart-badge">0</span></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell section--spaced">
+    <h1 class="section-title" style="color:#ff1f1f">Tu carrito</h1>
+
+    <div style="display:grid;grid-template-columns: 1fr 360px; gap:18px">
+      <!-- Lista de items -->
+      <div class="cardX">
+        <div class="body">
+          <div id="cart-empty" class="hint hidden">Tu carrito está vacío.</div>
+          <div id="cart-list" class="items">
+            <div class="hint">Cargando...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resumen -->
+      <aside class="cardX">
+        <div class="body">
+          <h3 style="margin-top:0">Resumen</h3>
+          <ul class="summary">
+            <li><span>Subtotal</span><span id="sum-sub">$0</span></li>
+            <li><span>Delivery</span><span id="sum-del">$2.000</span></li>
+            <li class="total"><span>Total</span><span id="sum-total">$0</span></li>
+          </ul>
+
+          <div class="actions" style="margin-top:12px;flex-wrap:wrap">
+            <a class="btn" href="menu.html">← Seguir comprando</a>
+            <a class="btn primary" id="btnPagar" href="checkout.html">Ir a pagar</a>
+            <button class="btn ghost" id="btnVaciar">Vaciar carrito</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>© 2025 Aircry JDM — Sushi Nikkei</footer>
+
+  <!-- Scripts: primero carrito base, luego control de capacidad, y finalmente el render del carrito -->
+  <script src="cart.js"></script>
+  <script src="capacidad-control.js"></script>
+  <script src="carrito.js"></script>
+</body>
+</html>

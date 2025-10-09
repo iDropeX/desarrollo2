@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Iniciar sesión — Aircry JDM</title>
+  <link rel="stylesheet" href="styles.css?v=20251009" />
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #fff;
+      font-family: "Poppins", system-ui, sans-serif;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #0a0a0a;
+      border-bottom: 1px solid #111;
+      padding: 15px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .brand strong {
+      color: #ff2b2b;
+    }
+
+    .btn {
+      background: none;
+      border: 1px solid #333;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #ff2b2b;
+      border-color: #ff2b2b;
+      color: #fff;
+    }
+
+    main.auth {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .auth-card {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 14px;
+      padding: 40px 45px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .auth-card h1 {
+      font-size: 1.7rem;
+      margin-bottom: 5px;
+    }
+
+    .auth-card p.sub {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-bottom: 25px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .field label {
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .field input {
+      background: #181818;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 10px;
+      color: #fff;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    .field input:focus {
+      border-color: #ff2b2b;
+      box-shadow: 0 0 4px #ff2b2b;
+    }
+
+    .btn.primary {
+      background: #ff2b2b;
+      border: none;
+      color: #fff;
+      width: 100%;
+      padding: 10px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn.primary:hover {
+      background: #ff4545;
+    }
+
+    .auth-actions {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .auth-actions a {
+      color: #ff2b2b;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: block;
+      margin: 4px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px 0;
+      font-size: 0.85rem;
+      color: #666;
+      border-top: 1px solid #111;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">🍱 JDM Aircry <strong>JDM</strong></div>
+    <div>
+      <a href="menu.html" class="btn">📋 Carta</a>
+      <a href="carrito.html" class="btn">🛒 Carrito</a>
+    </div>
+  </header>
+
+  <main class="auth">
+    <div class="auth-card">
+      <h1>Iniciar sesión</h1>
+      <p class="sub">Accede con tu cuenta de <strong>Aircry JDM</strong></p>
+
+      <form id="loginForm">
+        <div class="field">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" placeholder="example@email.com" required />
+        </div>
+
+        <div class="field">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" placeholder="••••••••" required />
+        </div>
+
+        <button type="submit" class="btn primary">Ingresar</button>
+
+        <div class="auth-actions">
+          <a href="forgot.html">¿Olvidaste tu contraseña?</a>
+          <a href="register.html">¿No tienes cuenta? Regístrate aquí</a>
+          <a href="index.html">← Volver al inicio</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>© 2025 Aircry JDM — Sushi Nikkei</footer>
+
+  <script>
+    const form = document.getElementById("loginForm");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const pass = document.getElementById("password").value.trim();
+
+      if (!email || !pass) {
+        alert("Por favor, completa todos los campos.");
+        return;
+      }
+
+      // Simulación de inicio de sesión exitoso
+      alert("Inicio de sesión exitoso ✅");
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>

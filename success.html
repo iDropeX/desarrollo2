@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pedido confirmado — Aircry JDM</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .ok{min-height:70vh;display:grid;place-items:center;text-align:center;color:#fff}
+    .ok .box{background:#0d0d0d;border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:26px}
+    .ok h1{color:#9BE27C;margin:0 0 6px}
+  </style>
+</head>
+<body>
+  <main class="ok">
+    <div class="box">
+      <h1>✅ Pedido confirmado</h1>
+      <p id="pm-text" style="color:#ccc"></p>
+      <p style="margin-top:10px"><a href="index.html" class="btn">Volver al inicio</a></p>
+    </div>
+  </main>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const pm = params.get('pm')||'';
+    const map = {webpay:'Webpay', mercadopago:'MercadoPago', efectivo:'Efectivo'};
+    document.getElementById('pm-text').textContent = 'Método de pago: ' + (map[pm]||'N/D');
+    // Vaciar carrito si quieres:
+    // localStorage.removeItem('aircry_cart');
+  </script>
+</body>
+</html>

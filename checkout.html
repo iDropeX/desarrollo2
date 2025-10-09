@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pago Seguro — Aircry JDM</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="app.js"></script>
+  <script defer src="payments.js"></script>
+  <style>
+    .checkout-shell{max-width:1100px;margin-inline:auto;padding:24px}
+    .checkout-title{color:#ff1f1f;font-weight:900;margin:8px 0 18px;text-align:center}
+    .checkout-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
+    .field{display:grid;gap:6px;margin-bottom:12px}
+    .field label{font-weight:800;color:#fff}
+    .field input,.field select,.field textarea{background:#0a0a0a;border:1px solid var(--border);border-radius:12px;padding:12px 14px;color:#fff}
+    .pm-list{display:grid;gap:10px}
+    .pm{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--border);border-radius:14px;background:#0b0b0b}
+    .pm input{accent-color:var(--primary)}
+    .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+    .badge{border:1px solid var(--border);border-radius:999px;padding:6px 10px;background:#0b0b0b}
+    @media (max-width:980px){.checkout-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="shell bar">
+      <a class="brand" href="index.html">
+        <span class="logo">JDM</span>
+        <span>Aircry <span style="color:#ff1f1f">JDM</span><small style="display:block;color:#aaa">Pago seguro</small></span>
+      </a>
+      <nav class="actions">
+        <a class="btn" href="menu.html"><span>📜</span><span>Carta</span></a>
+        <a class="btn cart" href="carrito.html" id="cart-btn"><span>🛍️</span><span class="cart-badge" id="cart-badge" hidden>0</span></a>
+        <a class="btn" href="login.html"><span>👤</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="checkout-shell">
+    <h1 class="checkout-title">Pago Seguro</h1>
+    <div class="checkout-grid">
+      <section class="cardX">
+        <div class="body">
+          <h3>Datos de contacto</h3>
+          <div class="field"><label>Nombre y apellido</label><input id="ck-name" type="text" placeholder="Juan Pérez" required></div>
+          <div class="field"><label>Correo</label><input id="ck-email" type="email" placeholder="ejemplo@email.com" required></div>
+          <div class="field"><label>Teléfono</label><input id="ck-phone" type="tel" placeholder="+56 9 1234 5678" required></div>
+
+          <h3 style="margin-top:10px">Entrega</h3>
+          <div class="field"><label>Dirección</label><input id="ck-address" type="text" placeholder="Calle 123, Depto, Comuna" required></div>
+          <div class="field"><label>Notas (opcional)</label><textarea id="ck-notes" rows="3" placeholder="Instrucciones para el repartidor"></textarea></div>
+
+          <h3 style="margin-top:10px">Método de pago</h3>
+          <div class="pm-list" id="pm-list">
+            <label class="pm"><input type="radio" name="pm" value="webpay" checked><div><div><strong>Webpay (Transbank)</strong></div><small>Tarjetas débito/crédito</small></div></label>
+            <label class="pm"><input type="radio" name="pm" value="mercadopago"><div><div><strong>MercadoPago</strong></div><small>Cuenta MercadoPago</small></div></label>
+            <label class="pm"><input type="radio" name="pm" value="efectivo"><div><div><strong>Efectivo</strong></div><small>Pagas al recibir</small></div></label>
+          </div>
+
+          <div class="actions" style="margin-top:14px">
+            <a class="btn" href="menu.html">← Seguir comprando</a>
+            <button id="pay-btn" class="btn primary">Pagar ahora</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="cardX summary">
+        <div class="body">
+          <h3>Resumen del pedido</h3>
+          <ul id="summary-list"><li class="muted">Tu carrito está vacío</li></ul>
+          <div style="border-top:1px solid var(--border);margin:12px 0"></div>
+          <ul>
+            <li><span class="muted">Subtotal</span><span id="sum-subtotal">$0</span></li>
+            <li><span class="muted">Delivery</span><span id="sum-delivery">$2.000</span></li>
+            <li class="total"><span>Total</span><span id="sum-total">$0</span></li>
+          </ul>
+          <div class="badges">
+            <span class="badge">🔒 SSL</span><span class="badge">🛡️ PCI DSS</span><span class="badge">✅ 3D Secure</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

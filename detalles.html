@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detalle del producto — Aircry JDM</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="app.js"></script>
+
+  <!-- Fallback visual mínimo por si styles.css no está -->
+  <style>
+    :root{color-scheme:dark}
+    body{background:#0a0a0a;color:#fff;font-family:system-ui,Segoe UI,Roboto,Arial;margin:0}
+    .shell{width:min(1200px,92vw);margin:auto}
+    .nav .bar{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
+    .btn{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px;border-radius:999px;border:1px solid #333;background:#121212;color:#fff;text-decoration:none}
+    .btn.primary{background:#e21f1f;border:0}
+    .btn.ghost{background:#0d0d0d;border:1px solid #333}
+    .cart-badge{position:relative;top:-10px;left:-6px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#ff1f1f;color:#fff;font:700 12px/18px system-ui;border:2px solid #000}
+    .hero{display:grid;grid-template-columns:520px 1fr;gap:24px;margin:20px 0 30px}
+    .photo{border:1px solid #222;border-radius:16px;background:#0f0f0f;overflow:hidden}
+    .photo img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:1/1}
+    .h-title{font-size:28px;font-weight:900;margin:0 0 6px}
+    .h-sub{color:#bbb;margin:0 0 16px}
+    .price{font-weight:900;font-size:22px}
+    .qty{display:inline-flex;align-items:center;border:1px solid #2a2a2a;border-radius:999px;overflow:hidden;margin-right:10px}
+    .qty button{width:36px;height:36px;background:#121212;border:0;color:#fff;cursor:pointer}
+    .qty span{width:42px;text-align:center}
+    .muted{color:#bbb}
+    hr{border:none;border-top:1px solid #222;margin:18px 0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+    .card{background:#0f0f0f;border:1px solid #222;border-radius:12px;overflow:hidden}
+    .card .ph{height:140px;background:#111;display:grid;place-items:center}
+    .card .ph img{width:100%;height:100%;object-fit:cover}
+    .card .body{padding:10px}
+    .chip{display:inline-block;border:1px solid #333;padding:6px 10px;border-radius:10px}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="shell bar">
+      <a class="brand" href="index.html" style="display:flex;gap:10px;align-items:center">
+        <span class="logo" style="width:36px;height:36px;border-radius:10px;background:#141414;display:grid;place-items:center;border:1px solid #333">JDM</span>
+        <span>Aircry <span style="color:#ff1f1f">JDM</span></span>
+      </a>
+      <nav style="display:flex;gap:10px;align-items:center">
+        <a class="btn" href="menu.html">📜 Carta</a>
+        <a class="btn" href="carrito.html">🛍️ <span id="cart-badge" class="cart-badge" hidden>0</span></a>
+        <a class="btn" href="login.html">👤</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell" id="app" style="padding-bottom:40px">
+    <a class="btn ghost" href="javascript:history.back()">← Volver</a>
+
+    <section id="detail" class="hero" aria-live="polite" style="min-height:300px">
+      <!-- Se rellena por JS -->
+    </section>
+
+    <section>
+      <h3 style="margin:8px 0 10px">Productos relacionados</h3>
+      <div id="related" class="grid">
+        <!-- Se rellena por JS -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast (lo usa app.js) -->
+  <div id="toast" class="toast" style="display:none"><span class="ok">✓</span> <span id="toast-text">Agregado</span></div>
+
+  <script>
+  // ===== Catálogo base (IDs iguales a los de menu.html) =====
+  const CATALOG = [
+    {id:"salmon", name:"Roll Salmón", price:6990, img:"img/roll_salmon.jpg", category:"rolls clásicos", tags:["salmón"], desc:"Salmón fresco, palta y queso crema. 8 piezas."},
+    {id:"nikkei", name:"Roll Nikkei", price:6990, img:"img/roll_nikkei.jpg", category:"rolls clásicos", tags:["salmón"], desc:"Salmón, ají amarillo y sésamo tostado. 8 piezas."},
+    {id:"veggie", name:"Veggie Roll", price:5990, img:"img/veggie.jpg", category:"rolls clásicos", tags:["veggie"], desc:"Pepino, palta y crocante de cebolla. 8 piezas."},
+    {id:"spicy", name:"Spicy Tuna", price:7490, img:"img/spicy.jpg", category:"rolls clásicos", tags:["spicy"], desc:"Atún, togarashi y mayo picante. 8 piezas."},
+    {id:"ebi", name:"Ebi Furai", price:7990, img:"img/ebi.jpg", category:"rolls clásicos", tags:["camarón"], desc:"Camarón furai, sésamo y teriyaki. 8 piezas."},
+
+    {id:"empanado", name:"Empanado de Pollo", price:7990, img:"img/roll_empanado.jpg", category:"rolls empanizados", tags:["empanado","pollo"], desc:"Panko crujiente, queso crema y palta. 8 piezas."},
+    {id:"spicy-emp", name:"Spicy Empanado", price:8490, img:"img/roll_spicy_emp.jpg", category:"rolls empanizados", tags:["empanado","spicy"], desc:"Empanizado con salsa spicy y togarashi. 8 piezas."},
+    {id:"katsu", name:"Chicken Katsu Roll", price:7990, img:"img/roll_katsu.jpg", category:"rolls empanizados", tags:["pollo","empanado"], desc:"Pollo katsu, sésamo y teriyaki. 8 piezas."},
+    {id:"crunch-emp", name:"Crunch Empanado", price:7990, img:"img/roll_crunch.jpg", category:"rolls empanizados", tags:["empanado"], desc:"Empanizado con crocante especial. 8 piezas."},
+    {id:"empanado-ebi", name:"Empanado Ebi", price:7990, img:"img/ebi.jpg", category:"rolls empanizados", tags:["empanado","camarón"], desc:"Camarón furai con tártara. 8 piezas."},
+
+    {id:"handroll-salmon", name:"Handroll Salmón", price:4990, img:"img/hr_salmon.jpg", category:"handrolls", tags:["salmón"], desc:"Cono de nori con salmón, palta y queso crema."},
+    {id:"handroll-camaron", name:"Handroll Camarón", price:5490, img:"img/hr_camaron.jpg", category:"handrolls", tags:["camarón"], desc:"Camarón furai con tártara, formato cono."},
+    {id:"handroll-spicy", name:"Handroll Spicy", price:5490, img:"img/hr_spicy.jpg", category:"handrolls", tags:["spicy"], desc:"Cono con mayo picante y togarashi."},
+
+    {id:"samurai", name:"Samurai Tempura", price:8900, img:"img/samurai_tempura.jpg", category:"ediciones especiales", tags:["tempura","salmón"], desc:"Salmón tempura con salsa dulce especial."},
+    {id:"avotori", name:"Avocado Tori", price:7900, img:"img/avocado_tori.jpg", category:"ediciones especiales", tags:["pollo"], desc:"Pollo, palta y salsa de la casa."},
+    {id:"spicysake", name:"Spicy Sake", price:7900, img:"img/sake_spicy.jpg", category:"ediciones especiales", tags:["spicy","salmón"], desc:"Salmón con mayo spicy. 8 piezas."}
+  ];
+
+  const CLP = n => n.toLocaleString("es-CL",{style:"currency",currency:"CLP",maximumFractionDigits:0});
+
+  // ===== Render detalle =====
+  (function(){
+    const params = new URLSearchParams(location.search);
+    const id = params.get("id");
+    const product = CATALOG.find(p=>p.id===id);
+
+    const detail = document.getElementById("detail");
+    const related = document.getElementById("related");
+
+    if(!product){
+      detail.innerHTML = `
+        <div style="grid-column:1/-1">
+          <div class="card" style="padding:16px">
+            Producto no encontrado. <a class="btn" style="margin-left:8px" href="menu.html">Volver a la carta</a>
+          </div>
+        </div>`;
+      return;
+    }
+
+    detail.innerHTML = `
+      <div class="photo">
+        <img src="${product.img}" alt="${product.name}">
+      </div>
+      <div>
+        <h1 class="h-title">${product.name}</h1>
+        <div class="h-sub">Categoría: <span class="muted">${product.category}</span></div>
+        <p style="margin:0 0 10px">${product.desc}</p>
+        <div style="display:flex;align-items:center;gap:12px;margin:12px 0 16px">
+          <span class="price">${CLP(product.price)}</span>
+          <span class="muted">/ por porción</span>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <div class="qty" aria-label="Cantidad">
+            <button id="qminus" aria-label="Restar">−</button>
+            <span id="qnum">1</span>
+            <button id="qplus" aria-label="Sumar">+</button>
+          </div>
+          <button id="addBtn"
+            class="btn primary"
+            data-id="${product.id}"
+            data-name="${product.name}"
+            data-price="${product.price}">
+            Agregar al carrito
+          </button>
+          <a class="btn ghost" href="carrito.html">Ver carrito</a>
+        </div>
+
+        <div>
+          <span class="chip">Etiquetas:</span>
+          ${product.tags.map(t=>`<span class="chip" style="margin-left:6px">${t}</span>`).join("")}
+        </div>
+        <hr>
+        <p class="muted">* Usa Webpay/MercadoPago en “Ir a pagar”. Preparación estimada 20–30 min.</p>
+      </div>
+    `;
+
+    // Relacionados por categoría (hasta 4)
+    const rel = CATALOG.filter(p => p.category===product.category && p.id!==product.id).slice(0,4);
+    if(rel.length){
+      related.innerHTML = rel.map(p => `
+        <article class="card">
+          <a class="ph" href="detalles.html?id=${p.id}" aria-label="${p.name}">
+            <img src="${p.img}" alt="${p.name}">
+          </a>
+          <div class="body">
+            <strong>${p.name}</strong>
+            <div class="muted" style="margin:4px 0">${CLP(p.price)}</div>
+            <div style="display:flex;gap:8px">
+              <a class="btn" href="detalles.html?id=${p.id}">Ver</a>
+              <button class="btn primary add-related"
+                data-id="${p.id}" data-name="${p.name}" data-price="${p.price}">
+                Agregar
+              </button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    } else {
+      related.innerHTML = `<div class="muted">No hay productos relacionados en esta categoría.</div>`;
+    }
+
+    // ===== Lógica de cantidad + agregar al carrito =====
+    let qty = 1;
+    const qminus = document.getElementById("qminus");
+    const qplus = document.getElementById("qplus");
+    const qnum = document.getElementById("qnum");
+    const addBtn = document.getElementById("addBtn");
+
+    qminus.addEventListener("click", ()=>{ qty=Math.max(1, qty-1); qnum.textContent=qty; });
+    qplus.addEventListener("click", ()=>{ qty=qty+1; qnum.textContent=qty; });
+
+    function getCart(){ try{ return JSON.parse(localStorage.getItem("cart"))||[] }catch{ return [] } }
+    function setCart(c){ localStorage.setItem("cart", JSON.stringify(c)); }
+
+    function updateBadge(){
+      const badge = document.getElementById("cart-badge");
+      if(!badge) return;
+      const cart = getCart();
+      const count = cart.reduce((s,it)=>s+it.qty,0);
+      if(count>0){ badge.hidden=false; badge.textContent=count; } else { badge.hidden=true; }
+    }
+
+    function addToCart(prod, units){
+      const cart = getCart();
+      const ex = cart.find(i=>i.id===prod.id);
+      if(ex) ex.qty += units;
+      else cart.push({...prod, qty: units});
+      setCart(cart);
+      updateBadge();
+      // Toast si existe
+      const toast = document.getElementById("toast");
+      const ttext = document.getElementById("toast-text");
+      if(toast && ttext){
+        ttext.textContent = `✅ ${prod.name} x${units} agregado`;
+        toast.style.display="flex"; toast.classList.add("visible");
+        setTimeout(()=>{ toast.classList.remove("visible"); toast.style.display="none"; }, 2000);
+      }
+    }
+
+    addBtn.addEventListener("click", ()=>{
+      addToCart({id:product.id, name:product.name, price:product.price}, qty);
+    });
+
+    // Agregar desde “relacionados”
+    related.addEventListener("click", (ev)=>{
+      const b = ev.target.closest(".add-related");
+      if(!b) return;
+      const prod = { id:b.dataset.id, name:b.dataset.name, price:parseInt(b.dataset.price,10) };
+      addToCart(prod, 1);
+    });
+
+    updateBadge();
+  })();
+  </script>
+</body>
+</html>

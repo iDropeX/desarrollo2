@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arma tu roll — Aircry JDM</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="armar_roll.js"></script>
+  <style>
+    body{background:#0a0a0a;color:#fff;font-family:system-ui;margin:0}
+    .shell{width:min(1100px,92vw);margin:auto;padding:20px}
+    .btn{background:#e21f1f;color:#fff;border:none;padding:10px 16px;border-radius:10px;cursor:pointer}
+    .chip{display:inline-block;border:1px solid #333;padding:6px 10px;border-radius:10px}
+    .qty{display:inline-flex;align-items:center;border:1px solid #333;border-radius:999px;overflow:hidden;margin:10px 0}
+    .qty button{background:#111;border:0;color:#fff;width:36px;height:36px;cursor:pointer}
+    .qty span{width:40px;text-align:center}
+  </style>
+</head>
+<body>
+  <header style="display:flex;justify-content:space-between;align-items:center;padding:14px 30px;border-bottom:1px solid #222">
+    <a href="index.html" style="color:#fff;text-decoration:none;font-weight:700;font-size:18px">Aircry <span style="color:#ff1f1f">JDM</span></a>
+    <nav style="display:flex;gap:10px">
+      <a href="menu.html" class="btn">📜 Carta</a>
+      <a href="carrito.html" class="btn">🛍️ Carrito</a>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <h1>🍱 Arma tu roll</h1>
+    <p class="muted">Personaliza tu roll con tus ingredientes favoritos. Se actualizará el precio automáticamente.</p>
+    <hr>
+
+    <form id="roll-builder">
+      <!-- BASE -->
+      <h3>Base</h3>
+      <label class="chip"><input type="radio" name="base" value="Arroz clásico" data-price="0" checked> Arroz clásico</label>
+      <label class="chip"><input type="radio" name="base" value="Arroz integral" data-price="300"> Arroz integral (+$300)</label>
+      <label class="chip"><input type="radio" name="base" value="Tempura" data-price="1000"> Tempura (+$1.000)</label>
+
+      <!-- PROTEÍNA -->
+      <h3>Proteína</h3>
+      <label class="chip"><input type="radio" name="protein" value="Salmón" data-price="2000" checked> Salmón (+$2.000)</label>
+      <label class="chip"><input type="radio" name="protein" value="Atún" data-price="1800"> Atún (+$1.800)</label>
+      <label class="chip"><input type="radio" name="protein" value="Pollo" data-price="1500"> Pollo (+$1.500)</label>
+      <label class="chip"><input type="radio" name="protein" value="Camarón" data-price="2200"> Camarón (+$2.200)</label>
+
+      <!-- RELLENOS -->
+      <h3>Rellenos</h3>
+      <label class="chip"><input type="checkbox" name="fill" value="Palta" data-price="500" checked> Palta (+$500)</label>
+      <label class="chip"><input type="checkbox" name="fill" value="Queso crema" data-price="400" checked> Queso crema (+$400)</label>
+      <label class="chip"><input type="checkbox" name="fill" value="Pepino" data-price="300"> Pepino (+$300)</label>
+
+      <!-- SALSAS -->
+      <h3>Salsas</h3>
+      <label class="chip"><input type="checkbox" name="sauce" value="Teriyaki" data-price="0" checked> Teriyaki</label>
+      <label class="chip"><input type="checkbox" name="sauce" value="Spicy mayo" data-price="300"> Spicy mayo (+$300)</label>
+
+      <!-- TOPPINGS -->
+      <h3>Toppings</h3>
+      <label class="chip"><input type="checkbox" name="top" value="Sésamo" data-price="0" checked> Sésamo</label>
+      <label class="chip"><input type="checkbox" name="top" value="Crocante" data-price="400"> Crocante (+$400)</label>
+
+      <hr>
+      <div class="qty">
+        <button type="button" id="minus">−</button>
+        <span id="qty">1</span>
+        <button type="button" id="plus">+</button>
+      </div>
+      <p><strong>Total:</strong> <span id="total">$0</span></p>
+      <button id="addCart" type="button" class="btn">Agregar al carrito</button>
+    </form>
+  </main>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menú — Aircry JDM</title>
+  <link rel="stylesheet" href="styles.css?v=20251008" />
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="shell">
+      <div class="bar">
+        <div class="brand">
+          <div class="logo">🍱</div>
+          Menú Aircry JDM
+        </div>
+        <div class="actions">
+          <a href="index.html" class="btn ghost">🏠 Inicio</a>
+          <a href="#nikkei" class="btn ghost">🍣 Nikkei</a>
+          <a href="#empanado" class="btn ghost">🔥 Apanados</a>
+          <a href="#rolls" class="btn ghost">🌯 Rolls</a>
+          <a href="#veggie" class="btn ghost">🥑 Veggie</a>
+          <a href="carrito.html" class="btn cart">🛒<span class="cart-badge">0</span></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Trigger filtros -->
+    <section class="shell section--spaced">
+      <div class="filters-trigger">
+        <button id="open-drawer" class="btn primary">🔎 Filtros</button>
+        <div id="filters-result">Mostrando <strong id="count-visible">0</strong> productos</div>
+      </div>
+    </section>
+
+    <!-- Drawer de filtros -->
+    <aside id="drawer" class="drawer" aria-hidden="true">
+      <div class="drawer__backdrop" id="drawer-backdrop"></div>
+      <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+        <div class="drawer__header">
+          <h3 id="drawer-title">Filtros</h3>
+          <button id="close-drawer" class="drawer__close">✕</button>
+        </div>
+        <div class="drawer__content">
+          <form id="filters-form">
+            <div class="f-group">
+              <label>Categoría</label>
+              <div class="chips">
+                <label><input type="checkbox" name="cat" value="nikkei"><span class="chip">🍣 Nikkei</span></label>
+                <label><input type="checkbox" name="cat" value="empanado"><span class="chip">🔥 Empanado</span></label>
+                <label><input type="checkbox" name="cat" value="rolls"><span class="chip">🌯 Rolls</span></label>
+                <label><input type="checkbox" name="cat" value="veggie"><span class="chip">🥑 Veggie</span></label>
+              </div>
+            </div>
+
+            <div class="f-group">
+              <label>Ingredientes</label>
+              <div class="chips">
+                <label><input type="checkbox" name="ing" value="salmon"><span class="chip">Salmón</span></label>
+                <label><input type="checkbox" name="ing" value="atun"><span class="chip">Atún</span></label>
+                <label><input type="checkbox" name="ing" value="pollo"><span class="chip">Pollo</span></label>
+                <label><input type="checkbox" name="ing" value="camaron"><span class="chip">Camarón</span></label>
+                <label><input type="checkbox" name="ing" value="palta"><span class="chip">Palta</span></label>
+                <label><input type="checkbox" name="ing" value="queso"><span class="chip">Queso crema</span></label>
+                <label><input type="checkbox" name="ing" value="spicy"><span class="chip">Spicy</span></label>
+              </div>
+            </div>
+
+            <div class="f-group">
+              <label>Precio</label>
+              <div class="f-price-row">
+                <input type="number" id="minPrice" placeholder="Mín" min="0" step="500">
+                <span class="sep">—</span>
+                <input type="number" id="maxPrice" placeholder="Máx" min="0" step="500">
+              </div>
+            </div>
+
+            <div class="drawer__actions">
+              <button type="button" id="clear-filters" class="btn">Limpiar</button>
+              <button type="submit" class="btn primary">Aplicar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ================== Secciones con CARRUSEL ================== -->
+
+    <!-- NIKKEI -->
+    <section class="shell section--spaced" id="nikkei">
+      <h2 class="section-title">Línea Nikkei</h2>
+
+      <div class="carousel" data-section="nikkei">
+        <button class="carousel-btn prev" aria-label="Anterior">‹</button>
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <article class="card" data-cat="nikkei" data-ing="salmon,palta,queso" data-price="8490">
+              <div class="ph"><img src="img/roll_nikkei.jpg" alt="Roll Nikkei"></div>
+              <div class="body">
+                <strong>Roll Nikkei</strong>
+                <p class="hint">Salmón, palta, queso crema y salsa unagi.</p>
+                <div class="price"><span>$8.490</span><div><a class="btn" href="#">Ver</a><button class="btn">Agregar</button></div></div>
+              </div>
+            </article>
+
+            <article class="card" data-cat="nikkei" data-ing="atun,pepino,spicy" data-price="8990">
+              <div class="ph"><img src="img/tuna_spicy.jpg" alt="Tuna Spicy Roll"></div>
+              <div class="body">
+                <strong>Tuna Spicy Roll</strong>
+                <p class="hint">Atún fresco, palta, sriracha y sésamo.</p>
+                <div class="price"><span>$8.990</span><div><a class="btn" href="#">Ver</a><button class="btn">Agregar</button></div></div>
+              </div>
+            </article>
+
+            <article class="card" data-cat="nikkei" data-ing="salmon,queso,palta,spicy" data-price="8790">
+              <div class="ph"><img src="img/salmon_roll.jpg" alt="Salmón Spicy"></div>
+              <div class="body">
+                <strong>Salmón Spicy</strong>
+                <p class="hint">Salmón, queso crema, palta, spicy mayo.</p>
+                <div class="price"><span>$8.790</span><div><a class="btn" href="#">Ver</a><button class="btn">Agregar</button></div></div>
+              </div>
+            </article>
+
+            <article class="card" data-cat="nikkei" data-ing="salmon,palta" data-price="7990">
+              <div class="ph"><img src="img/sake_maki.jpg" alt="Sake Maki"></div>
+              <div class="body">
+                <strong>Sake Maki</strong>
+                <p class="hint">Salmón fresco y palta.</p>
+                <div class="price"><span>$7.990</span><div><a class="btn" href="#">Ver</a><button class="btn">Agregar</button></div></div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <button class="carousel-btn next" aria-label="Siguiente">›</button>
+      </div>
+    </section>
+
+    <!-- APANADOS -->
+    <section class="shell section--spaced" id="empanado">
+      <h2 class="section-title">Línea Apanados</h2>
+
+      <div class="carousel" data-section="empanado">
+        <button class="carousel-btn prev" aria-label="Anterior">‹</button>
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <article class="card" data-cat="empanado" data-ing="pollo,palta,queso" data-price="7990">
+              <div class="ph"><img src="img/apanado_pollo.jpg" alt="Empanado de pollo"></div>
+              <div class="body">
+                <strong>Apanados de pollo</strong>
+                <p class="hint">Panko crujiente, pollo, queso y palta.</p>
+                <div class="price"><span>$7.990</span><div><a class="btn" href="#">Ver</a><button class="btn">Agregar</button></div></div>
+              </div>
+            </article>
+
+            <article class="card" data-cat="empanado" data-ing="camaron,palta,queso,spicy" data-price="8490">
+              <div class="ph"><img src="img/apanado_camaron.jpg" alt="Empanado de camarón"></div>
+              <div class="body">
+                <strong>Apanados de camarón</strong>
+                <p class="hint">Camarón tempura con spicy mayo.</p>
+                <div class="price"><span>$8.490</span><div><a class="btn" href="#">Ver</a><button class="btn">Agregar</button></div></div>
+              </div>
+            </article>
+
+            <article class="card" data-cat="empanado" data-ing="pollo,queso" data-price="7290">
+              <div class="ph"><img src="img/apando_simple.jpg" alt="Empanado simple"></div>
+              <div class="body">
+                <strong>Apanados simple</strong>
+                <p class="hint">Pollo y queso crema, crocante.</p>
+                <div class="price"><span>$7.290</span><div><a class="btn" href="#">Ver</a><button class="btn">Agregar</button></div></div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <button class="carousel-btn next" aria-label="Siguiente">›</button>
+      </div>
+    </section>
+
+    <!-- ROLLS -->
+    <section class="shell section--spaced" id="rolls">
+      <h2 class="section-title">Rolls clásicos</h2>
+
+      <div class="carousel" data-section="rolls">
+        <button class="carousel-btn prev" aria-label="Anterior">‹</button>
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <article class="card" data-cat="rolls" data-ing="kanikama,palta,pepino" data-price="6990">
+              <div class="ph"><img src="img/california.jpg" alt="California roll"></div>
+              <div class="body">
+                <strong>California roll</strong>
+                <p class="hint">Kanikama, pepino y palta.</p>
+                <div class="price"><span>$6.990</span><div><a class="btn" href="#">Ver</a><button class="btn">Agregar</button></div></div>
+              </div>
+            </article>
+
+            <article class="card" data-cat="rolls" data-ing="salmon,queso,palta" data-price="7490">
+              <div class="ph"><img src="img/salmon_roll.webp" alt="Salmón roll"></div>
+              <div class="body">
+                <strong>Salmón roll</strong>
+                <p class="hint">Salmón, queso crema y palta.</p>
+                <div class="price"><span>$7.490</span><div><a class="btn" href="#">Ver</a><button class="btn">Agregar</button></div></div>
+              </div>
+            </article>
+
+            <article class="card" data-cat="rolls" data-ing="atun,pepino" data-price="7090">
+              <div class="ph"><img src="img/tuna_maki.jpg" alt="Tuna Maki"></div>
+              <div class="body">
+                <strong>Tuna Maki</strong>
+                <p class="hint">Atún y pepino.</p>
+                <div class="price"><span>$7.090</span><div><a class="btn" href="#">Ver</a><button class="btn">Agregar</button></div></div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <button class="carousel-btn next" aria-label="Siguiente">›</button>
+      </div>
+    </section>
+
+    <!-- VEGGIE -->
+    <section class="shell section--spaced" id="veggie">
+      <h2 class="section-title">Veggie</h2>
+
+      <div class="carousel" data-section="veggie">
+        <button class="carousel-btn prev" aria-label="Anterior">‹</button>
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <article class="card" data-cat="veggie" data-ing="palta,pepino,zanahoria,queso" data-price="6490">
+              <div class="ph"><img src="img/Veggie_roll.webp" alt="Veggie roll"></div>
+              <div class="body">
+                <strong>Veggie roll</strong>
+                <p class="hint">Pepino, palta, zanahoria y queso crema.</p>
+                <div class="price"><span>$6.490</span><div><a class="btn" href="#">Ver</a><button class="btn">Agregar</button></div></div>
+              </div>
+            </article>
+
+            <article class="card" data-cat="veggie" data-ing="palta,pepino" data-price="5990">
+              <div class="ph"><img src="img/Avocado_roll.jpg" alt="Avocado roll"></div>
+              <div class="body">
+                <strong>Avocado roll</strong>
+                <p class="hint">Palta y pepino, sésamo blanco.</p>
+                <div class="price"><span>$5.990</span><div><a class="btn" href="#">Ver</a><button class="btn">Agregar</button></div></div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <button class="carousel-btn next" aria-label="Siguiente">›</button>
+      </div>
+    </section>
+
+    <!-- CTA Armar tu roll -->
+    <section class="shell section--spaced" id="armar">
+      <h2 class="section-title">¿Quieres algo 100% a tu gusto?</h2>
+      <p class="hint">Elige base, proteína, toppings y salsas.</p>
+      <div class="actions" style="margin-top:10px">
+        <a href="armar_roll.html" class="btn primary">🍱 Arma tu roll</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2025 Aircry JDM — Sushi Nikkei</footer>
+
+  <!-- JS carrusel + filtros + drawer -->
+  <script>
+    /* Drawer */
+    const drawer = document.getElementById('drawer');
+    document.getElementById('open-drawer').addEventListener('click', () => {
+      drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false');
+    });
+    document.getElementById('close-drawer').addEventListener('click', closeDrawer);
+    document.getElementById('drawer-backdrop').addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeDrawer(); });
+    function closeDrawer(){ drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); }
+
+    /* Carrusel: usa scroll del viewport para que no se desordene */
+    document.querySelectorAll('.carousel').forEach(carousel => {
+      const viewport = carousel.querySelector('.carousel-viewport');
+      const prev = carousel.querySelector('.carousel-btn.prev');
+      const next = carousel.querySelector('.carousel-btn.next');
+
+      function move(dir){
+        const step = viewport.clientWidth * 0.9; // casi una pantalla
+        viewport.scrollBy({ left: dir * step, behavior: 'smooth' });
+      }
+      prev.addEventListener('click', () => move(-1));
+      next.addEventListener('click', () => move(1));
+    });
+
+    /* Filtros */
+    const form = document.getElementById('filters-form');
+    const countEl = document.getElementById('count-visible');
+    const clearBtn = document.getElementById('clear-filters');
+
+    function getChecked(name){
+      return [...form.querySelectorAll(`input[name="${name}"]:checked`)].map(i => i.value);
+    }
+    function applyFilters(e){
+      if(e) e.preventDefault();
+      const cats = getChecked('cat');
+      const ings = getChecked('ing');
+      const minP = Number(document.getElementById('minPrice').value || 0);
+      const maxP = Number(document.getElementById('maxPrice').value || Infinity);
+
+      let visible = 0;
+      document.querySelectorAll('.card[data-cat]').forEach(card => {
+        const cat = card.dataset.cat;
+        const price = Number(card.dataset.price || 0);
+        const ingList = (card.dataset.ing || '').split(',');
+
+        if (cats.length && !cats.includes(cat)) { card.classList.add('hidden'); return; }
+        if (ings.length && !ings.every(tag => ingList.includes(tag))) { card.classList.add('hidden'); return; }
+        if (price < minP || price > maxP) { card.classList.add('hidden'); return; }
+
+        card.classList.remove('hidden'); visible++;
+      });
+
+      countEl.textContent = visible;
+      closeDrawer();
+    }
+    function clearFilters(){
+      form.reset();
+      document.querySelectorAll('.card[data-cat]').forEach(c => c.classList.remove('hidden'));
+      countEl.textContent = document.querySelectorAll('.card[data-cat]').length;
+    }
+    form.addEventListener('submit', applyFilters);
+    clearBtn.addEventListener('click', clearFilters);
+    clearFilters(); // conteo inicial
+  </script>
+ <script>
+/* Carrusel infinito 1x1 con soporte a pocas tarjetas */
+(function(){
+  const GAP = 16; // Debe coincidir con .carousel-track { gap:16px }
+
+  const visibles = w => (w >= 1024 ? 4 : w >= 640 ? 2 : 1);
+
+  function initCarousel(root){
+    const viewport = root.querySelector('.carousel-viewport');
+    const track    = root.querySelector('.carousel-track');
+    const prevBtn  = root.querySelector('.carousel-btn.prev');
+    const nextBtn  = root.querySelector('.carousel-btn.next');
+
+    // ----- estado -----
+    let base = [];        // tarjetas "reales" (sin clones)
+    let vis = 4;          // visibles por fila
+    let cw  = 0;          // ancho fijo por tarjeta
+    let i   = 0;          // índice actual (incluye clones)
+    let busy = false;
+
+    // helpers
+    const noAnim = on => track.classList.toggle('no-anim', on);
+    const setX = (animate=true) => {
+      noAnim(!animate);
+      const x = -i * (cw + GAP);
+      track.style.transform = `translate3d(${x}px,0,0)`;
+      if(!animate) requestAnimationFrame(()=>noAnim(false));
+    };
+
+    function measure(){
+      vis = visibles(viewport.clientWidth);
+      cw  = Math.max(220, Math.floor((viewport.clientWidth - GAP*(vis-1)) / vis));
+      base.forEach(c => c.style.width = cw+'px');
+    }
+
+    // Duplica tarjetas si hay pocas para que el loop sea posible
+    function ensureEnoughItems(){
+      const originals = Array.from(track.children).filter(n => !n.classList.contains('__clone__') && !n.classList.contains('__virt__'));
+      base = originals;
+
+      // Si hay <= vis, duplicamos hasta tener (vis + 1) "reales"
+      while (base.length <= vis) {
+        originals.forEach(n => {
+          const cp = n.cloneNode(true);
+          cp.classList.add('__virt__'); // virtual pero lo tratamos como real
+          track.appendChild(cp);
+        });
+        base = Array.from(track.children).filter(n => !n.classList.contains('__clone__'));
+      }
+    }
+
+    function build(){
+      // limpiar clones previos
+      track.querySelectorAll('.__clone__').forEach(n => n.remove());
+
+      // garantizar mínimo de ítems
+      ensureEnoughItems();
+
+      // medir y fijar ancho
+      measure();
+
+      // crear clones a izquierda/derecha (vis y vis)
+      const head = base.slice(0, vis).map(n => n.cloneNode(true));
+      const tail = base.slice(-vis).map(n => n.cloneNode(true));
+      head.forEach(n => { n.classList.add('__clone__'); n.style.width=cw+'px'; track.appendChild(n); });
+      tail.forEach(n => { n.classList.add('__clone__'); n.style.width=cw+'px'; track.insertBefore(n, track.firstChild); });
+
+      // posicionarnos en el primer "real"
+      i = vis;
+      setX(false);
+    }
+
+    function wrapIfNeeded(){
+      const realCount  = base.length;
+      const totalCount = track.children.length; // reales + clones
+      // ¿cruzamos clones de la derecha?
+      if (i >= realCount + vis){
+        i = vis;            // vuelve al primer real
+        setX(false);
+      }
+      // ¿cruzamos clones de la izquierda?
+      else if (i < vis){
+        i = realCount + vis - 1;  // último real
+        setX(false);
+      }
+      busy = false;
+    }
+
+    function go(step){
+      if (busy) return;
+      busy = true;
+      i += step;           // step = +1 o -1
+      setX(true);
+      track.addEventListener('transitionend', wrapIfNeeded, { once:true });
+    }
+
+    // Eventos
+    prevBtn.addEventListener('click', () => go(-1));
+    nextBtn.addEventListener('click', () => go(+1));
+
+    // Swipe móvil
+    let sx=0, dx=0, touching=false;
+    viewport.addEventListener('touchstart', e => { touching=true; sx=e.touches[0].clientX; dx=0; }, {passive:true});
+    viewport.addEventListener('touchmove',  e => { if(!touching) return; dx = e.touches[0].clientX - sx; }, {passive:true});
+    viewport.addEventListener('touchend',   () => { if(!touching) return; touching=false; if(Math.abs(dx)>40) go(dx<0?+1:-1); });
+
+    // Reconstruir en resize (debounce)
+    let t;
+    window.addEventListener('resize', () => { clearTimeout(t); t=setTimeout(build,120); });
+
+    build();
+  }
+
+  // Inicia todos los carruseles (incluido Veggie)
+  document.querySelectorAll('.carousel').forEach(initCarousel);
+})();
+</script>
+<script src="cart.js"></script>
+<script src="capacidad-control.js"></script>
+<script src="ver-producto.js"></script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aircry JDM — Sushi Nikkei</title>
+  <link rel="stylesheet" href="styles.css?v=20251008" />
+</head>
+
+<body>
+
+  <!-- HEADER / NAVBAR -->
+  <header class="nav">
+    <div class="shell">
+      <div class="bar">
+        <div class="brand">
+          <div class="logo">🍣</div>
+          JDM Aircry JDM
+        </div>
+        <div class="actions">
+          <a href="menu.html" class="btn ghost">📜 Menú</a>
+          <a href="#tiempo" class="btn ghost ">⏱️ Tiempo estimado</a>
+          <a href="login.html" class="btn ghost">👤 Iniciar sesión</a>
+          <a href="carrito.html" class="btn cart">🛒<span class="cart-badge">0</span></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" style="background-image:url('img/portada.png')">
+      <div class="shade"></div>
+      <div class="content shell">
+        <p class="hint">LÍNEA <span style="color:var(--primary);font-weight:900">APANADO</span> PRESENTA</p>
+        <h1 class="section-title" style="margin-top:6px">SUSHI APANADO DE POLLO</h1>
+        <p class="hint">Panko crujiente • Queso crema • Palta • Salsa tártara o teriyaki.</p>
+        <div class="actions" style="margin-top:8px">
+          <!-- Enlaces apuntan a menu.html -->
+          <a href="menu.html#empanado" class="btn primary">Comprar ahora</a>
+          <a href="menu.html#empanado" class="btn">Ver detalles</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECOMENDADOS (4 fijos, sin ruleta) -->
+    <section class="shell section--spaced" id="recomendados">
+      <h2 class="section-title">Recomendados</h2>
+
+      <div class="results-grid">
+        <!-- Apanado -->
+        <article class="card">
+          <div class="ph"><img src="img/apanado_pollo.jpg" alt="Sushi apanado de pollo"></div>
+          <div class="body">
+            <strong>Sushi apanado de pollo</strong>
+            <p class="hint">Panko crujiente, queso crema, palta.</p>
+            <div class="price">
+              <span>$7.990</span>
+              <div>
+                <a class="btn" href="menu.html#empanado">Ver</a>
+                <button class="btn">Agregar</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Nikkei -->
+        <article class="card">
+          <div class="ph"><img src="img/roll_nikkei.jpg" alt="Roll Nikkei"></div>
+          <div class="body">
+            <strong>Roll Nikkei</strong>
+            <p class="hint">Salmón, palta, queso crema y salsa unagi.</p>
+            <div class="price">
+              <span>$8.490</span>
+              <div>
+                <a class="btn" href="menu.html#nikkei">Ver</a>
+                <button class="btn">Agregar</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Clásico -->
+        <article class="card">
+          <div class="ph"><img src="img/california.jpg" alt="California roll"></div>
+          <div class="body">
+            <strong>California roll</strong>
+            <p class="hint">Kanikama, palta, pepino y sésamo.</p>
+            <div class="price">
+              <span>$6.990</span>
+              <div>
+                <a class="btn" href="menu.html#rolls">Ver</a>
+                <button class="btn">Agregar</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Veggie -->
+        <article class="card">
+          <div class="ph"><img src="img/Veggie_roll.webp" alt="Veggie roll"></div>
+          <div class="body">
+            <strong>Veggie roll</strong>
+            <p class="hint">Pepino, palta, zanahoria y queso crema.</p>
+            <div class="price">
+              <span>$6.490</span>
+              <div>
+                <a class="btn" href="menu.html#veggie">Ver</a>
+                <button class="btn">Agregar</button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Aircry JDM — Sushi Nikkei
+  </footer>
+
+  <script src="eta.js"></script>
+  <script>
+    mountETA('eta-widget');
+  </script>
+  <script src="tiempo_estimado.js"></script>
+  <script src="eta.js"></script>
+  <script>
+//====== Tiempo estimado ======
+
+(function(){
+  // 1) Construir sección si falta
+  let sec = document.getElementById('tiempo');
+  if(!sec){
+    const host = document.querySelector('main') || document.body;
+    sec = document.createElement('section');
+    sec.id = 'tiempo';
+    sec.className = 'shell section--spaced';
+    sec.innerHTML = `
+      <h2 class="section-title">Tiempo estimado</h2>
+      <div class="cardX"><div class="body">
+        <label style="display:flex;align-items:center;gap:8px">
+          <input type="checkbox" id="hora-punta"> <strong>Hora punta</strong>
+        </label>
+        <div class="field" style="max-width:240px;margin-top:8px">
+          <label>Distancia (km)</label>
+          <input id="distancia" type="number" min="0" step="0.1" value="0">
+        </div>
+        <p id="resultado" style="color:#ff3b3b;margin:10px 0 6px">Entrega estimada: <strong>—</strong></p>
+        <div class="actions" style="gap:8px;flex-wrap:wrap">
+          <button class="btn" id="btnRecalc">Recalcular</button>
+          <button class="btn ghost" id="btnCerca" data-km="2">Cerca (2 km)</button>
+          <button class="btn ghost" id="btnMedio" data-km="5">Medio (5 km)</button>
+          <button class="btn ghost" id="btnLejos" data-km="9">Lejos (9 km)</button>
+        </div>
+      </div></div>
+    `;
+    host.appendChild(sec);
+  }
+
+  // 2) Wire up
+  const distInput = sec.querySelector('#distancia');
+  const horaPunta = sec.querySelector('#hora-punta');
+  const outEl     = sec.querySelector('#resultado');
+  const btnRecalc = sec.querySelector('#btnRecalc');
+
+  function num(v){ return Math.max(0, parseFloat(String(v).replace(',', '.')) || 0); }
+
+  function calcular(){
+    const km = num(distInput.value);
+    const MIN_PREP = 5;       // min. por preparación
+    const MIN_PER_KM = 3;     // min por km
+    const RUSH = 1.5;         // multiplicador hora punta
+
+    let t = Math.max(MIN_PREP, km * MIN_PER_KM);
+    if (horaPunta.checked) t *= RUSH;
+
+    const lo = Math.round(t);
+    const hi = lo + 1;
+    outEl.innerHTML = `Entrega estimada: <strong>${lo}–${hi} min</strong>`;
+  }
+
+  // Eventos
+  distInput.addEventListener('input', calcular);
+  horaPunta.addEventListener('change', calcular);
+  btnRecalc.addEventListener('click', (e)=>{ e.preventDefault(); calcular(); });
+
+  sec.querySelectorAll('[data-km]').forEach(b=>{
+    b.addEventListener('click', (e)=>{
+      e.preventDefault();
+      distInput.value = b.dataset.km;
+      calcular();
+    });
+  });
+
+  // 3) Primera corrida
+  calcular();
+})();
+</script>
+</body>
+</html>
