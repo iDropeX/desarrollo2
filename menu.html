@@ -8,7 +8,6 @@
 </head>
 
 <body>
-  <!-- NAVBAR -->
   <header class="nav">
     <div class="shell">
       <div class="bar">
@@ -29,7 +28,6 @@
   </header>
 
   <main>
-    <!-- Trigger filtros -->
     <section class="shell section--spaced">
       <div class="filters-trigger">
         <button id="open-drawer" class="btn primary">🔎 Filtros</button>
@@ -37,7 +35,6 @@
       </div>
     </section>
 
-    <!-- Drawer de filtros -->
     <aside id="drawer" class="drawer" aria-hidden="true">
       <div class="drawer__backdrop" id="drawer-backdrop"></div>
       <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
@@ -88,9 +85,6 @@
       </div>
     </aside>
 
-    <!-- ================== Secciones con CARRUSEL ================== -->
-
-    <!-- NIKKEI -->
     <section class="shell section--spaced" id="nikkei">
       <h2 class="section-title">Línea Nikkei</h2>
 
@@ -139,7 +133,6 @@
       </div>
     </section>
 
-    <!-- APANADOS -->
     <section class="shell section--spaced" id="empanado">
       <h2 class="section-title">Línea Apanados</h2>
 
@@ -179,7 +172,6 @@
       </div>
     </section>
 
-    <!-- ROLLS -->
     <section class="shell section--spaced" id="rolls">
       <h2 class="section-title">Rolls clásicos</h2>
 
@@ -219,7 +211,6 @@
       </div>
     </section>
 
-    <!-- VEGGIE -->
     <section class="shell section--spaced" id="veggie">
       <h2 class="section-title">Veggie</h2>
 
@@ -250,7 +241,6 @@
       </div>
     </section>
 
-    <!-- CTA Armar tu roll -->
     <section class="shell section--spaced" id="armar">
       <h2 class="section-title">¿Quieres algo 100% a tu gusto?</h2>
       <p class="hint">Elige base, proteína, toppings y salsas.</p>
@@ -262,9 +252,8 @@
 
   <footer>© 2025 Aircry JDM — Sushi Nikkei</footer>
 
-  <!-- JS carrusel + filtros + drawer -->
   <script>
-    /* Drawer */
+    
     const drawer = document.getElementById('drawer');
     document.getElementById('open-drawer').addEventListener('click', () => {
       drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false');
@@ -274,7 +263,6 @@
     document.addEventListener('keydown', e => { if(e.key==='Escape') closeDrawer(); });
     function closeDrawer(){ drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); }
 
-    /* Carrusel: usa scroll del viewport para que no se desordene */
     document.querySelectorAll('.carousel').forEach(carousel => {
       const viewport = carousel.querySelector('.carousel-viewport');
       const prev = carousel.querySelector('.carousel-btn.prev');
@@ -288,7 +276,6 @@
       next.addEventListener('click', () => move(1));
     });
 
-    /* Filtros */
     const form = document.getElementById('filters-form');
     const countEl = document.getElementById('count-visible');
     const clearBtn = document.getElementById('clear-filters');
@@ -326,12 +313,12 @@
     }
     form.addEventListener('submit', applyFilters);
     clearBtn.addEventListener('click', clearFilters);
-    clearFilters(); // conteo inicial
+    clearFilters();
   </script>
  <script>
-/* Carrusel infinito 1x1 con soporte a pocas tarjetas */
+
 (function(){
-  const GAP = 16; // Debe coincidir con .carousel-track { gap:16px }
+  const GAP = 16;
 
   const visibles = w => (w >= 1024 ? 4 : w >= 640 ? 2 : 1);
 
@@ -341,14 +328,12 @@
     const prevBtn  = root.querySelector('.carousel-btn.prev');
     const nextBtn  = root.querySelector('.carousel-btn.next');
 
-    // ----- estado -----
-    let base = [];        // tarjetas "reales" (sin clones)
-    let vis = 4;          // visibles por fila
-    let cw  = 0;          // ancho fijo por tarjeta
-    let i   = 0;          // índice actual (incluye clones)
+    let base = [];
+    let vis = 4;
+    let cw  = 0;
+    let i   = 0;
     let busy = false;
 
-    // helpers
     const noAnim = on => track.classList.toggle('no-anim', on);
     const setX = (animate=true) => {
       noAnim(!animate);
@@ -363,16 +348,14 @@
       base.forEach(c => c.style.width = cw+'px');
     }
 
-    // Duplica tarjetas si hay pocas para que el loop sea posible
     function ensureEnoughItems(){
       const originals = Array.from(track.children).filter(n => !n.classList.contains('__clone__') && !n.classList.contains('__virt__'));
       base = originals;
 
-      // Si hay <= vis, duplicamos hasta tener (vis + 1) "reales"
       while (base.length <= vis) {
         originals.forEach(n => {
           const cp = n.cloneNode(true);
-          cp.classList.add('__virt__'); // virtual pero lo tratamos como real
+          cp.classList.add('__virt__');
           track.appendChild(cp);
         });
         base = Array.from(track.children).filter(n => !n.classList.contains('__clone__'));
@@ -380,37 +363,31 @@
     }
 
     function build(){
-      // limpiar clones previos
       track.querySelectorAll('.__clone__').forEach(n => n.remove());
 
-      // garantizar mínimo de ítems
       ensureEnoughItems();
 
-      // medir y fijar ancho
       measure();
 
-      // crear clones a izquierda/derecha (vis y vis)
       const head = base.slice(0, vis).map(n => n.cloneNode(true));
       const tail = base.slice(-vis).map(n => n.cloneNode(true));
       head.forEach(n => { n.classList.add('__clone__'); n.style.width=cw+'px'; track.appendChild(n); });
       tail.forEach(n => { n.classList.add('__clone__'); n.style.width=cw+'px'; track.insertBefore(n, track.firstChild); });
 
-      // posicionarnos en el primer "real"
       i = vis;
       setX(false);
     }
 
     function wrapIfNeeded(){
       const realCount  = base.length;
-      const totalCount = track.children.length; // reales + clones
-      // ¿cruzamos clones de la derecha?
+      const totalCount = track.children.length;
       if (i >= realCount + vis){
-        i = vis;            // vuelve al primer real
+        i = vis;
         setX(false);
       }
-      // ¿cruzamos clones de la izquierda?
+        
       else if (i < vis){
-        i = realCount + vis - 1;  // último real
+        i = realCount + vis - 1;
         setX(false);
       }
       busy = false;
@@ -419,29 +396,25 @@
     function go(step){
       if (busy) return;
       busy = true;
-      i += step;           // step = +1 o -1
+      i += step;
       setX(true);
       track.addEventListener('transitionend', wrapIfNeeded, { once:true });
     }
 
-    // Eventos
     prevBtn.addEventListener('click', () => go(-1));
     nextBtn.addEventListener('click', () => go(+1));
 
-    // Swipe móvil
     let sx=0, dx=0, touching=false;
     viewport.addEventListener('touchstart', e => { touching=true; sx=e.touches[0].clientX; dx=0; }, {passive:true});
     viewport.addEventListener('touchmove',  e => { if(!touching) return; dx = e.touches[0].clientX - sx; }, {passive:true});
     viewport.addEventListener('touchend',   () => { if(!touching) return; touching=false; if(Math.abs(dx)>40) go(dx<0?+1:-1); });
 
-    // Reconstruir en resize (debounce)
     let t;
     window.addEventListener('resize', () => { clearTimeout(t); t=setTimeout(build,120); });
 
     build();
   }
 
-  // Inicia todos los carruseles (incluido Veggie)
   document.querySelectorAll('.carousel').forEach(initCarousel);
 })();
 </script>
