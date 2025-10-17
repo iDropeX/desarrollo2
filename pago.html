@@ -49,7 +49,7 @@
     <h1>Pago seguro</h1>
 
     <div class="grid">
-      <!-- Columna izquierda: productos + datos -->
+
       <section class="panel">
         <h3 style="margin-top:0">Tu pedido</h3>
         <div id="order-list" class="list"><div class="empty">Cargando…</div></div>
@@ -95,7 +95,6 @@
         </form>
       </section>
 
-      <!-- Columna derecha: resumen -->
       <aside class="panel">
         <h3 style="margin-top:0">Resumen</h3>
         <div class="summary">
@@ -112,7 +111,7 @@
   </main>
 
   <script>
-    // ===== Pago: leer carrito, render, totales y confirmar =====
+
     (function(){
       const listEl = document.getElementById('order-list');
       const subEl  = document.getElementById('sum-sub');
@@ -121,7 +120,6 @@
       const confirmBtn = document.getElementById('confirm');
       const comunaSel = document.getElementById('comuna');
 
-      // Tarifas demo por comuna
       const DELIVERY_BY_COMUNA = {
         "Santiago": 2000,
         "Providencia": 2500,
@@ -193,11 +191,10 @@
         confirmBtn.disabled = false;
       }
 
-      // Recalcular total cuando cambia la comuna
       comunaSel.addEventListener('change', render);
 
       confirmBtn.addEventListener('click', ()=>{
-        // Validaciones simples
+
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
         const phone = document.getElementById('phone').value.trim();
@@ -211,8 +208,7 @@
           alert('Tu carrito está vacío.');
           return;
         }
-        // Aquí integrarías la pasarela real (Webpay, MercadoPago, etc.)
-        // Demo: limpiar y redirigir a "gracias"
+
         localStorage.removeItem('cart');
         window.location.href = 'gracias.html';
       });
