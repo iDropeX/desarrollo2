@@ -1,22 +1,19 @@
-/* payments.js — Pago seguro (simulado con handoff a gateway) */
 (function(){
   const fmt = n => n.toLocaleString('es-CL',{style:'currency',currency:'CLP'}).replace(/\s/g,'');
   const toInt = n => Math.max(0, parseInt(n||0,10) || 0);
 
-  // Intentamos leer carrito de distintas claves por compatibilidad
   function readCart(){
     const raw = localStorage.getItem('aircry_cart') || localStorage.getItem('cart') || '[]';
     try{ return JSON.parse(raw) }catch{ return [] }
   }
 
-  // Fallback de precios si no existe PRODUCTS global
   const PRICE_MAP = {
     empanado: 7990, ebi: 7990, spicy: 7490, veggie: 5990, nikkei: 6990,
     salmon: 6990, atun: 6490, 'handroll-salmon': 4990, 'handroll-camaron': 5490
   };
 
   function getItemInfo(item){
-    // Si app.js expone PRODUCTS, úsalo; si no, usamos fallback
+
     const byId = (window.PRODUCTS || []).find(p => p.id === item.id);
     const name = byId?.name || item.name || item.id;
     const price = toInt(byId?.price || item.price || PRICE_MAP[item.id] || 0);
@@ -48,7 +45,6 @@
     document.getElementById('sum-delivery')?.replaceChildren(document.createTextNode(fmt(delivery)));
     document.getElementById('sum-total')?.replaceChildren(document.createTextNode(fmt(total)));
 
-    // Guardamos total por si el gateway lo requiere
     sessionStorage.setItem('checkout_total', String(total));
     sessionStorage.setItem('checkout_payload', JSON.stringify({items:cart, subtotal, delivery, total}));
   }
@@ -76,28 +72,24 @@
 
     const pm = getSelectedPM();
     const payload = JSON.parse(sessionStorage.getItem('checkout_payload')||'{}');
-    // Normalmente aquí llamarías a tu backend para crear la transacción:
-    // POST /api/checkout {pm, payload, customer:{...}}
-    // y tu backend responde con la URL del gateway (Webpay/MercadoPago).
-    // Por ahora haremos un handoff simulado:
 
     if(pm === 'webpay'){
       alert('Redirigiendo a Webpay (simulado)…');
-      // window.location.href = 'https://webpay.cl/...'; // en producción
+
       window.location.href = 'success.html?pm=webpay';
     }else if(pm === 'mercadopago'){
       alert('Redirigiendo a MercadoPago (simulado)…');
-      // window.location.href = 'https://mercadopago.com/...'
+
       window.location.href = 'success.html?pm=mercadopago';
     }else{
-      // Efectivo
+
       alert('Pedido confirmado. Pagarás en efectivo al recibir.');
       window.location.href = 'success.html?pm=efectivo';
     }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    // Solo en checkout.html
+
     if(!document.getElementById('pay-btn')) return;
     renderSummary();
     document.getElementById('pay-btn').addEventListener('click', pay);
