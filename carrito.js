@@ -1,11 +1,6 @@
-/* ============================================================
-   Aircry JDM — Render de carrito para localStorage.cart
-   Estructura de cada item: { name, price, img, quantity, pieces }
-   Estilos usados: cart-list, cart-row, qty, price-tag, btn danger
-   ============================================================ */
 (() => {
   const CART_KEY = 'cart';
-  const DELIVERY = 2000; // CLP
+  const DELIVERY = 2000;
 
   const $  = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -33,7 +28,6 @@
     return { subtotal, total: subtotal + DELIVERY };
   }
 
-  // ---------- TEMPLATE DE FILA (coincide con el CSS nuevo) ----------
   function rowTemplate(it, idx) {
     return `
       <div class="cart-row row" data-index="${idx}" data-pieces="${it.pieces || 10}">
@@ -58,7 +52,7 @@
     const empty = $('#cart-empty');
     const cart = getCart();
 
-    if (!list) return; // por seguridad
+    if (!list) return;
 
     if (!cart.length) {
       empty?.classList?.remove('hidden');
@@ -76,7 +70,6 @@
     updateBadge();
   }
 
-  // ---------- ACCIONES ----------
   function changeQty(index, delta) {
     const cart = getCart();
     if (!cart[index]) return;
@@ -98,7 +91,6 @@
     render();
   }
 
-  // Delegación de eventos en la lista
   document.addEventListener('click', (e) => {
     const row = e.target.closest('.cart-row');
     if (!row) return;
@@ -111,11 +103,9 @@
     if (act === 'remove')    { removeItem(idx);    return; }
   });
 
-  // Vaciar carrito
   const btnVaciar = $('#btnVaciar');
   if (btnVaciar) btnVaciar.addEventListener('click', emptyCart);
 
-  // Inicializar y reaccionar a cambios desde otras pestañas
   document.addEventListener('DOMContentLoaded', render);
   window.addEventListener('storage', (e) => { if (e.key === CART_KEY) render(); });
 })();
