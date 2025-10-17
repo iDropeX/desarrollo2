@@ -1,13 +1,7 @@
-/* ============================================================
-   Aircry JDM — Control de capacidad (compatible total)
-   No bloquea el evento original. 
-   Solo actúa después de agregar.
-   ============================================================ */
 (() => {
   const MAX_PIEZAS = 50;
   const PIEZAS_POR_ROLL = 10;
 
-  /* ---------- util: leer carrito ---------- */
   function readCart() {
     try {
       return JSON.parse(localStorage.getItem('cart') || '[]');
@@ -31,7 +25,6 @@
     badge.classList.add('bump');
   }
 
-  /* ---------- feedback visual ---------- */
   function showAlert(msg = '⚠️ Control de capacidad: no puedes superar las 50 piezas.') {
     let t = document.querySelector('.toast-capacidad');
     if (!t) {
@@ -82,16 +75,12 @@
     }, 800);
   }
 
-  /* ============================================================
-     MENÚ — observa los botones después de click
-     ============================================================ */
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('.btn, button');
     if (!btn) return;
     const texto = (btn.textContent || '').toLowerCase();
     if (!texto.includes('agregar') && !texto.includes('añadir')) return;
 
-    // Espera a que se ejecute tu addToCart (200 ms)
     setTimeout(() => {
       const total = getTotalPiezas();
       if (total >= MAX_PIEZAS) {
@@ -103,9 +92,6 @@
     }, 200);
   });
 
-  /* ============================================================
-     CARRITO — controla el botón "+"
-     ============================================================ */
   document.addEventListener('click', (e) => {
     const plus = e.target.closest('.qty button');
     if (!plus) return;
