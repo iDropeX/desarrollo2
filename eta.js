@@ -1,33 +1,23 @@
-/* ============================================================
-   Aircry JDM — ETA flexible
-   - Detecta elementos por múltiples IDs / data-attrs
-   - Recalcula en tiempo real por km y hora punta
-   ============================================================ */
 (() => {
-  // ======= Config =======
   const BASE_PREP_MIN   = 5;   // mínimo por preparación
   const MIN_PER_KM      = 3;   // minutos por kilómetro
   const RUSH_MULTIPLIER = 1.5; // hora punta
 
-  // ======= Helpers =======
   const sel = (root, s) => root.querySelector(s);
   const parseNum = (v) => {
     if (typeof v !== 'string') v = String(v ?? '');
-    // Acepta "2", "2.5", "2,5"
     const m = v.replace(',', '.').match(/-?\d+(\.\d+)?/);
     return m ? parseFloat(m[0]) : 0;
   };
 
-  // Contenedor del bloque (si existe #tiempo lo usamos para no “contaminar” toda la página)
   const box = document.getElementById('tiempo') || document;
 
-  // Entradas (busca por varios IDs/atributos)
   const distInput =
       sel(box, '#etaKm') ||
       sel(box, '#distancia') ||
       sel(box, 'input[name="distancia"]') ||
       sel(box, 'input[data-eta-km]') ||
-      sel(box, 'input[type="number"]');       // último recurso dentro del bloque
+      sel(box, 'input[type="number"]');
 
   const rushInput =
       sel(box, '#etaRush') ||
@@ -68,7 +58,7 @@
     let t = Math.max(BASE_PREP_MIN, km * MIN_PER_KM);
     if (rush) t *= RUSH_MULTIPLIER;
     const lo = Math.max(1, Math.round(t));
-    const hi = lo + 1; // rango natural
+    const hi = lo + 1;
     return { lo, hi };
   }
 
@@ -93,7 +83,6 @@
     setOutput(`${lo}–${hi} min`);
   }
 
-  // Eventos (reacción inmediata)
   if (distInput) {
     distInput.addEventListener('input',  recalc);
     distInput.addEventListener('change', recalc);
@@ -105,7 +94,6 @@
     btnCalc.addEventListener('click', (e) => { e.preventDefault(); recalc(); });
   }
 
-  // Botones rápidos: leen data-km o número en el texto
   function attachQuick(btn) {
     if (!btn || !distInput) return;
     btn.addEventListener('click', (e) => {
@@ -119,8 +107,6 @@
   attachQuick(btnMid);
   attachQuick(btnFar);
 
-  // Recalcular al cargar
   document.addEventListener('DOMContentLoaded', recalc);
-  // Y por si el bloque se renderiza después
   setTimeout(recalc, 100);
 })();
