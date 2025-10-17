@@ -1,7 +1,7 @@
 (() => {
-  const BASE_PREP_MIN   = 5;   // mínimo por preparación
-  const MIN_PER_KM      = 3;   // minutos por kilómetro
-  const RUSH_MULTIPLIER = 1.5; // hora punta
+  const BASE_PREP_MIN   = 5;
+  const MIN_PER_KM      = 3;
+  const RUSH_MULTIPLIER = 1.5;
 
   const sel = (root, s) => root.querySelector(s);
   const parseNum = (v) => {
