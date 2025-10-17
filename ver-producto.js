@@ -1,8 +1,5 @@
-/* ============================================================
-   Aircry JDM — Vista de producto (modal al hacer clic en "Ver")
-   ============================================================ */
 document.addEventListener("DOMContentLoaded", () => {
-  // Crear modal si no existe
+
   let modal = document.getElementById("producto-modal");
   if (!modal) {
     modal = document.createElement("div");
@@ -41,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     price.textContent = `Precio: $${data.price.toLocaleString("es-CL")}`;
     modal.classList.add("open");
     document.body.style.overflow = "hidden";
-    // vincular botón agregar al carrito
+
     addBtn.onclick = () => {
       if (typeof addToCart === "function") addToCart(data);
       modal.classList.remove("open");
@@ -58,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
   backdrop.addEventListener("click", closeModal);
   document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
 
-  // Delegar clic en botones “Ver”
   document.body.addEventListener("click", e => {
     const btn = e.target.closest(".card .btn:not(.primary)");
     if (btn && btn.textContent.trim().toLowerCase() === "ver") {
