@@ -9,7 +9,6 @@
 
 <body>
 
-  <!-- HEADER / NAVBAR -->
   <header class="nav">
     <div class="shell">
       <div class="bar">
@@ -28,7 +27,7 @@
   </header>
 
   <main>
-    <!-- HERO -->
+
     <section class="hero" style="background-image:url('img/portada.png')">
       <div class="shade"></div>
       <div class="content shell">
@@ -36,19 +35,18 @@
         <h1 class="section-title" style="margin-top:6px">SUSHI APANADO DE POLLO</h1>
         <p class="hint">Panko crujiente • Queso crema • Palta • Salsa tártara o teriyaki.</p>
         <div class="actions" style="margin-top:8px">
-          <!-- Enlaces apuntan a menu.html -->
+
           <a href="menu.html#empanado" class="btn primary">Comprar ahora</a>
           <a href="menu.html#empanado" class="btn">Ver detalles</a>
         </div>
       </div>
     </section>
 
-    <!-- RECOMENDADOS (4 fijos, sin ruleta) -->
     <section class="shell section--spaced" id="recomendados">
       <h2 class="section-title">Recomendados</h2>
 
       <div class="results-grid">
-        <!-- Apanado -->
+
         <article class="card">
           <div class="ph"><img src="img/apanado_pollo.jpg" alt="Sushi apanado de pollo"></div>
           <div class="body">
@@ -64,7 +62,6 @@
           </div>
         </article>
 
-        <!-- Nikkei -->
         <article class="card">
           <div class="ph"><img src="img/roll_nikkei.jpg" alt="Roll Nikkei"></div>
           <div class="body">
@@ -80,7 +77,6 @@
           </div>
         </article>
 
-        <!-- Clásico -->
         <article class="card">
           <div class="ph"><img src="img/california.jpg" alt="California roll"></div>
           <div class="body">
@@ -96,7 +92,6 @@
           </div>
         </article>
 
-        <!-- Veggie -->
         <article class="card">
           <div class="ph"><img src="img/Veggie_roll.webp" alt="Veggie roll"></div>
           <div class="body">
@@ -126,10 +121,10 @@
   <script src="tiempo_estimado.js"></script>
   <script src="eta.js"></script>
   <script>
-//====== Tiempo estimado ======
+
 
 (function(){
-  // 1) Construir sección si falta
+
   let sec = document.getElementById('tiempo');
   if(!sec){
     const host = document.querySelector('main') || document.body;
@@ -158,7 +153,6 @@
     host.appendChild(sec);
   }
 
-  // 2) Wire up
   const distInput = sec.querySelector('#distancia');
   const horaPunta = sec.querySelector('#hora-punta');
   const outEl     = sec.querySelector('#resultado');
@@ -168,9 +162,9 @@
 
   function calcular(){
     const km = num(distInput.value);
-    const MIN_PREP = 5;       // min. por preparación
-    const MIN_PER_KM = 3;     // min por km
-    const RUSH = 1.5;         // multiplicador hora punta
+    const MIN_PREP = 5;
+    const MIN_PER_KM = 3;
+    const RUSH = 1.5; 
 
     let t = Math.max(MIN_PREP, km * MIN_PER_KM);
     if (horaPunta.checked) t *= RUSH;
@@ -180,7 +174,7 @@
     outEl.innerHTML = `Entrega estimada: <strong>${lo}–${hi} min</strong>`;
   }
 
-  // Eventos
+
   distInput.addEventListener('input', calcular);
   horaPunta.addEventListener('change', calcular);
   btnRecalc.addEventListener('click', (e)=>{ e.preventDefault(); calcular(); });
@@ -193,7 +187,6 @@
     });
   });
 
-  // 3) Primera corrida
   calcular();
 })();
 </script>
