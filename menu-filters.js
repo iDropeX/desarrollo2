@@ -1,9 +1,7 @@
-/* ====== Búsqueda + filtros (drawer lateral) ====== */
 (function(){
   const qs = s => document.querySelector(s);
   const qsa = s => Array.from(document.querySelectorAll(s));
 
-  // ----- INDEXACIÓN DE CARDS -----
   function indexCards(){
     qsa('.section-title').forEach(h2 => {
       const cat = h2.textContent.trim().toLowerCase().replace(/^[^a-záéíóúñ]+/i,'');
@@ -29,7 +27,6 @@
     });
   }
 
-  // ----- APLICAR FILTROS -----
   function applyFilters(){
     const resultEl = qs('#filters-result');
     const q   = (qs('#f-q')?.value || '').trim().toLowerCase();
@@ -77,7 +74,6 @@
     applyFilters();
   }
 
-  // ----- DRAWER (abrir/cerrar) -----
   function openDrawer(){ qs('#filters-drawer')?.classList.add('open'); }
   function closeDrawer(){ qs('#filters-drawer')?.classList.remove('open'); }
 
@@ -87,7 +83,6 @@
     indexCards();
     applyFilters();
 
-    // botones/acciones
     qs('#open-filters')?.addEventListener('click', openDrawer);
     qsa('[data-close-filters]')?.forEach(b => b.addEventListener('click', closeDrawer));
     document.addEventListener('keydown', e => { if(e.key==='Escape') closeDrawer(); });
@@ -95,7 +90,6 @@
     qs('#f-apply')?.addEventListener('click', ()=>{ applyFilters(); closeDrawer(); });
     qs('#f-clear')?.addEventListener('click', clearFilters);
 
-    // búsqueda reactiva
     qs('#f-q')?.addEventListener('input', ()=>{
       clearTimeout(window.__fDeb);
       window.__fDeb = setTimeout(applyFilters, 180);
