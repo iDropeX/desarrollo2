@@ -24,8 +24,7 @@
     const pm = params.get('pm')||'';
     const map = {webpay:'Webpay', mercadopago:'MercadoPago', efectivo:'Efectivo'};
     document.getElementById('pm-text').textContent = 'Método de pago: ' + (map[pm]||'N/D');
-    // Vaciar carrito si quieres:
-    // localStorage.removeItem('aircry_cart');
+
   </script>
 </body>
 </html>
