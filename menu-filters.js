@@ -74,7 +74,6 @@
     applyFilters();
   }
 
-  // ----- DRAWER (abrir/cerrar) -----
   function openDrawer(){ qs('#filters-drawer')?.classList.add('open'); }
   function closeDrawer(){ qs('#filters-drawer')?.classList.remove('open'); }
 

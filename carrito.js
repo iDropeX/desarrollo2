@@ -1,6 +1,6 @@
 (() => {
   const CART_KEY = 'cart';
-  const DELIVERY = 2000; // CLP
+  const DELIVERY = 2000;
 
   const $  = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
