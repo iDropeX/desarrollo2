@@ -1,6 +1,3 @@
-/* ============================================================
-   Aircry JDM — Sistema de carrito básico con localStorage
-   ============================================================ */
 (() => {
   const CART_KEY = 'cart';
   const PIEZAS_POR_ROLL = 10;
@@ -22,7 +19,6 @@
     badge.classList.add('bump');
   }
 
-  // Mostrar feedback visual al agregar
   function toast(msg) {
     let t = document.querySelector('.toast-cart');
     if (!t) {
@@ -50,7 +46,6 @@
     setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 250); }, 1800);
   }
 
-  // Función para agregar un producto al carrito
   function addToCart(card) {
     const name  = card.querySelector('strong')?.textContent.trim() || 'Producto';
     const price = Number(card.dataset.price || 0);
@@ -67,7 +62,6 @@
     toast(`✅ ${name} agregado`);
   }
 
-  // Detectar clicks en los botones “Agregar”
   document.addEventListener('click', e => {
     const btn = e.target.closest('button.btn');
     if (!btn) return;
